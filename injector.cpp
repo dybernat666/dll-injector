@@ -20,7 +20,11 @@ DWORD GetProccesIdByName(const char* processname) {
     CloseHandle(snapshot);
     return 0;
 }
-int main () {
+int main (int argc,char* argv[]) {
+    if (IsDebuggerAttached()) {
+        MessageBox(NULL,"Debugger founded","aborting",MB_OK | MB_ICONERROR);
+        return 1;
+    }
     std::string target_process_name;
     std::string dll_path;
     std::cout << "enter target process name" << "\n";
